@@ -1,6 +1,8 @@
 package com.wangxi.filecounter.servlet;
 import java.sql.*;
+import java.util.Enumeration;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -38,8 +40,7 @@ public class filecounter extends HttpServlet {
 	    else if (uri.equalsIgnoreCase("/service/2/2"))
 	    {
 		    out.write("{\"userId\": 1, \"id\": 1, \"title\": \"jiaoshou\"}");
-	    }
-	    else
+	    } else if(uri.equalsIgnoreCase("/service/"))
 	    {
 		    //out.write("{\"userId\": 1, \"id\": 1, \"title\": \"huang\"}");
 	        String url = "jdbc:mysql://localhost:3306/"; 
@@ -66,6 +67,7 @@ public class filecounter extends HttpServlet {
 		    		e.printStackTrace(); 	
 		    		} 
 		 }
+
 	}
 
 	/**
@@ -73,7 +75,30 @@ public class filecounter extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		this.doGet(request, response);
+		Enumeration headerNames = request.getHeaderNames();
+		
+		//while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			String value = request.getHeader(key);
+		//}
+		String url = "jdbc:mysql://localhost:3306/"; 
+	    String dbName = "mydb";
+	    String driver = "com.mysql.jdbc.Driver"; 
+	    String userName = "root"; 
+	    String password = "hzw"; 
+	    try { 
+		    	Class.forName(driver).newInstance(); 
+		    	Connection conn = DriverManager.getConnection(url+dbName, userName, password); 
+		    	Statement stmt = conn.createStatement();
+		    	String sql= "insert into tutorials_tbl values(5, \"mvmg\""+", "+value+", NULL);";
+		    	//String sql= "insert into tutorials_tbl values(3, \"erere\", \"abcefg\", NULL);";	    	
+		    	
+		    	stmt.execute(sql);
+		    	stmt.close();
+		    	conn.close(); 
+	    	} catch (Exception e) { 
+	    		e.printStackTrace(); 	
+	    	}
 	}
 
 }

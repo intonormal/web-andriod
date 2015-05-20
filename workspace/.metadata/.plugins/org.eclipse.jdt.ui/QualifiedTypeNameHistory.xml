@@ -3,4 +3,7 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.apache.http.client.methods.HttpPost"/>
 <fullyQualifiedTypeName name="java.net.URI"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="org.apache.http.entity.StringEntity"/>
+<fullyQualifiedTypeName name="java.util.Enumeration"/>
 </qualifiedTypeNameHistroy>
